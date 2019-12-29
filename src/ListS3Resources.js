@@ -1,24 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { Paper, Table, TableHead, TableCell, TableBody, TableRow } from '@material-ui/core'
+import { Paper, Button, Table, TableHead, TableCell, TableBody, TableRow, Typography, TextField } from '@material-ui/core'
+
+function textFieldChanged(item, setCreds)
+{
+	setCreds(item.target.value)
+}
+
+function fetchFiles(creds, setFileData)
+{
+	fetch("http://localhost:3000/s3/fileList", { headers: JSON.stringify(creds)})
+		.then( res => res.json())
+		.then( data => setFileData(data))
+		.catch( err => {
+			console.log(err)
+		})
+}
 
 export default function ListS3Resources()
 {
 	let [fileData, setFileData] = useState([])
-	useEffect(() => {
-		let h = {
-			"accessKeyId": "AKIA5O44R3UMM3SN53Z5",
-			"secretAccessKey": "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",
-			"bucket": "yugiohsite",
-			"key": "index.css",
-			"Accept": "*/*",
-		}
-		fetch("http://localhost:3000/s3/fileList", {headers: h})
-			.then((res) => res.json())
-			.then((data) => setFileData(data))
-	}, [])
+	let [creds, setCreds] = useState('')
 
 	return(
 		<div>
+			<Paper>
+				<Typography variant='h5'>
+					Credentials
+				</Typography>
+				<TextField id='creds' helperText='Paste json credentials' multiline={true} onChange={(item) => textFieldChanged(item, setCreds)} value={creds} />
+				<Button onClick={() => fetchFiles(creds, setFileData)} >Submit</Button>
+			</Paper>
 			<Paper style={{ maxWidth: '700px' }}>
 				<Table >
 					<TableHead>
