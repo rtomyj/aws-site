@@ -6,49 +6,63 @@ function textFieldChanged(item, setCreds)
 	setCreds(item.target.value)
 }
 
-function fetchFiles(creds, setFileData)
-{
-	fetch("http://localhost:3000/s3/fileList", { headers: JSON.stringify(creds)})
-		.then( res => res.json())
-		.then( data => setFileData(data))
-		.catch( err => {
-			console.log(err)
-		})
-}
 
 export default function ListS3Resources()
 {
-	let [fileData, setFileData] = useState([])
-	let [creds, setCreds] = useState('')
+	const [username, setUsername] = useState('')
+	const [bucketList, setBucketList] = useState([])
+	const [creds, setCreds] = useState( '' )
 
 	return(
 		<div>
 			<Paper>
+	<Typography variant='h4'>Logged in as: {username}</Typography>
 				<Typography variant='h5'>
 					Credentials
 				</Typography>
 				<TextField id='creds' helperText='Paste json credentials' multiline={true} onChange={(item) => textFieldChanged(item, setCreds)} value={creds} />
-				<Button onClick={() => fetchFiles(creds, setFileData)} >Submit</Button>
+				<Button onClick={() => fetchFiles(creds, setBucketList)} >Submit</Button>
 			</Paper>
 			<Paper style={{ maxWidth: '700px' }}>
 				<Table >
 					<TableHead>
 						<TableRow>
-							<TableCell>File Name</TableCell>
-							<TableCell>Size</TableCell>
+							<TableCell>Bucket</TableCell>
+							<TableCell>Creation Date</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
-							{fileData.map(file => (
+							{ bucketList.map( bucket => (
 								<TableRow>
-									<TableCell>{file.name}</TableCell>
-									<TableCell>{file.size}</TableCell>
+									<TableCell>{ bucket.Name }</TableCell>
+									<TableCell>{ bucket.CreationDate }</TableCell>
 								</TableRow>
-							))
-							}
+							)) }
 					</TableBody>
 				</Table>
 			</Paper>
 		</div>
 	)
+
+
+
+	function fetchFiles()
+	{
+		fetch( 'https://localhost/s3/bucketList', {
+			method: 'POST'
+			, body:  JSON.stringify( JSON.parse( creds ) )
+			, headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+		})
+			.then( res => res.json())
+			.then( resContent => {
+				console.log( resContent )
+				setUsername( resContent.Owner.DisplayName )
+				setBucketList( resContent.Buckets )
+			})
+			.catch( err => {
+				console.log(err)
+			})
+
+			//getFileList()
+	}
 }
