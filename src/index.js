@@ -10,11 +10,11 @@ import { Routes } from './Routes'
 const theme = createMuiTheme({
 	palette: {
 		primary: {
-			main: '#e0115f',
+			main: '#d03c39',
 			contrastDefaultColor: 'light'
 		},
 		secondary: {
-			main: '#07c007',
+			main: '#0097ac',
 			contrastDefaultColor: 'light'
 		}
 	},
@@ -47,7 +47,7 @@ const theme = createMuiTheme({
 		h4: {
 			fontFamily: 'Nunito',
 			fontWeight: 600,
-			color: '#e0115f',
+			color: '#d03c39',
 			lineHeight: '1.65rem',
 			marginBottom: '.75rem',
 			fontSize: '1.55rem',
@@ -57,42 +57,42 @@ const theme = createMuiTheme({
 			fontWeight: 800,
 			lineHeight: '1.3rem',
 			marginBottom: '.5rem',
-			color: '#595959',
+			color: '#2a241d',
 			fontSize: '1.05rem'
 		},
 		h6: {
 			fontFamily: 'Nunito',
 			fontWeight: 400,
 			lineHeight: '1.3rem',
-			color: '#383838',
+			color: '#2a241d',
 			fontSize: '.95rem',
 		},
 		subtitle1: {
 			fontFamily: 'OpenSans',
 			fontWeight: 600,
 			lineHeight: '1.15rem',
-			color: '#2b2a2a',
+			color: '#2a241d',
 			fontSize: '.91rem',
 		},
 		subtitle2: {
 			fontFamily: 'OpenSans',
 			fontWeight: 500,
 			lineHeight: '1.15rem',
-			color: '#2b2a2a',
+			color: '#2a241d',
 			fontSize: '.88rem',
 		},
 		body1: {
 			fontFamily: 'OpenSans',
 			fontWeight: 500,
 			lineHeight: '1.15rem',
-			color: '#2b2a2a',
+			color: '#2a241d',
 			fontSize: '.83rem',
 		},
 		body2: {
 			fontFamily: 'OpenSans',
 			fontWeight: 500,
 			lineHeight: '1.1rem',
-			color: '#2b2a2a',
+			color: '#2a241d',
 			fontSize: '.77rem',
 		},
 	}
