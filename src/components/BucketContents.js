@@ -4,7 +4,7 @@ import { Typography, Paper, Button } from '@material-ui/core'
 import { AwsTableView } from './AwsTableView'
 
 
-export const Bucket = ( props ) =>
+export const BucketContents = ( props ) =>
 {
 	const [credentials, setCredentials] = useState({})
 	const [bucket, setBucket] = useState('')

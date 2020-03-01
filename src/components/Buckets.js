@@ -11,7 +11,7 @@ function textFieldChanged(item, setCreds)
 }
 
 
-export const ListS3Resources = (props) =>
+export const Buckets = (props) =>
 {
 	const [username, setUsername] = useState('')
 	const [numberOfBuckets, setNumberOfBuckets] = useState('')
@@ -53,7 +53,7 @@ export const ListS3Resources = (props) =>
 	{
 		const bucketName = event.target.childNodes[0].wholeText
 		props.history.push({
-			pathname: `/bucket/${bucketName}`,
+			pathname: `/bucketContents/${bucketName}`,
 			data: {
 				bucket: bucketName,
 				credentials: creds
